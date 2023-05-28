@@ -24,6 +24,14 @@ export function Post() {
 
         <p><a href='#'>#novoprojeto #nlw #rocketseat</a></p>
       </div>
+
+      <form className={styles.formComment}>
+        <strong>Deixe seu feedback</strong>
+        <textarea placeholder='Comente aqui' />
+        <footer>
+          <button type='submit'>Enviar</button>
+        </footer>
+      </form>
     </article>
   );
 }
