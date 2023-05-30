@@ -20,12 +20,19 @@ export function Post({author,publishedAt,content}) {
   }
 
   function handleNewComment(event) {
+    event.target.setCustomValidity('');
     setNewCommentText(event.target.value);
   }
 
   function onDeleteComment(comment){
     setComments(comments.filter((c) => c !== comment));
   }
+
+  function handleNewCommentInvalid(event){
+    event.target.setCustomValidity('Não é possível enviar um comentário vazio')
+  }
+
+  const isNewCommentEmpty = newCommentText.length<3;
 
   return (    
     <article className={styles.post}>
@@ -55,9 +62,16 @@ export function Post({author,publishedAt,content}) {
 
       <form onSubmit={handleCommentSubmit} className={styles.formComment}>
         <strong>Deixe seu feedback</strong>
-        <textarea value={newCommentText} name='comment' placeholder='Comente aqui' onChange={handleNewComment}/>
+        <textarea 
+          value={newCommentText} 
+          name='comment' 
+          placeholder='Comente aqui' 
+          onChange={handleNewComment}
+          required
+          onInvalid={handleNewCommentInvalid}
+        />
         <footer>
-          <button type='submit'>Enviar</button>
+          <button type='submit' disabled={isNewCommentEmpty}>Enviar</button>
         </footer>
       </form>
 
