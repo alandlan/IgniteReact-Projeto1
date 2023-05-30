@@ -2,31 +2,35 @@ import { ThumbsUp, Trash } from 'phosphor-react'
 import styles from './Comment.module.css'
 import { Avatar } from './Avatar'
 
-export function Comment({content}) {
-  return (
-    <div className={styles.comment}>
-        <Avatar hasBorder={false} src="https://github.com/alandlan.png"/>
-        <div className={styles.commentBox}>
-            <div className={styles.commentContent}>
-                <header>
-                    <div className={styles.authorAndTime}>
-                        <strong>Alan Martins</strong>
-                        <time title='1 de janeiro' dateTime='2023-01-01 01:00:00'>Cerca de 1h atrás</time>
-                    </div>
+export function Comment({content,onDeleteComment}) {
+    function handleDeleteComment() {
+        onDeleteComment(content);
+    }
 
-                    <button title='Deletar comentário'>
-                        <Trash size={24} />
+    return (
+        <div className={styles.comment}>
+            <Avatar hasBorder={false} src="https://github.com/alandlan.png"/>
+            <div className={styles.commentBox}>
+                <div className={styles.commentContent}>
+                    <header>
+                        <div className={styles.authorAndTime}>
+                            <strong>Alan Martins</strong>
+                            <time title='1 de janeiro' dateTime='2023-01-01 01:00:00'>Cerca de 1h atrás</time>
+                        </div>
+
+                        <button onClick={handleDeleteComment} title='Deletar comentário'>
+                            <Trash size={24} />
+                        </button>
+                    </header>
+                    <p>{content}</p>
+                </div>
+                <footer>
+                    <button>
+                        <ThumbsUp/>
+                        Aplaudir <span>20</span>
                     </button>
-                </header>
-                <p>{content}</p>
+                </footer>
             </div>
-            <footer>
-                <button>
-                    <ThumbsUp/>
-                    Aplaudir <span>20</span>
-                </button>
-            </footer>
         </div>
-    </div>
-  )
+    )
 }
