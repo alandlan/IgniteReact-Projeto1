@@ -1,4 +1,4 @@
-import {Post} from './components/Post'
+import {Post , PostType} from './components/Post'
 import { Header } from './components/Header'
 import { Sidebar } from './components/Sidebar'
 
@@ -8,8 +8,7 @@ import './global.css'
 
 
 function App() {
-  console.log('App.jsx')
-  const posts = [
+  const posts : PostType[] = [
     {
       id: 1,
       author:{
@@ -46,12 +45,10 @@ function App() {
       <div className={styles.wrapper}>
         <Sidebar />
         <main>
-          {posts.map((post,index) => { 
+          {posts.map((post) => { 
             return (
-              <Post key={index}
-                author={post.author}
-                content={post.content}
-                publishedAt={post.publishedAt}/>
+              <Post key={post.id}
+                post={post}/>
               )
             })}
         </main>
